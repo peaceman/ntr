@@ -6,6 +6,11 @@ use Illuminate\Routing\Controller;
 
 class EventLabelsController extends Controller {
 
+	public function __construct(User $user)
+	{
+		$this->user = $user;
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -13,7 +18,8 @@ class EventLabelsController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$eventLabels = $this->user->eventLabels()->get();
+		return view('event-labels.index', compact('eventLabels'));
 	}
 
 	/**
@@ -30,12 +36,11 @@ class EventLabelsController extends Controller {
 	 * Store a newly created resource in storage.
 	 *
 	 * @param \App\Http\Requests\CreateEventLabelRequest $request
-	 * @param \Illuminate\Contracts\Auth\User $user
 	 * @return Response
 	 */
-	public function store(CreateEventLabelRequest $request, User $user)
+	public function store(CreateEventLabelRequest $request)
 	{
-		$eventLabel = $user->eventLabels()->create($request->all());
+		$eventLabel = $this->user->eventLabels()->create($request->all());
 		return redirect('event-labels.index');
 	}
 
