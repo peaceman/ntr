@@ -43,4 +43,9 @@ class User extends Model implements UserContract, CanResetPasswordContract {
 		return $this->hasMany('App\EventLabel');
 	}
 
+	public function events()
+	{
+		return $this->hasMany('App\Event');
+	}
+
 }
