@@ -74,8 +74,14 @@ class RouteServiceProvider extends ServiceProvider {
 
 		});
 
-		$router->group(['middleware' => ['auth']], function($router) {
-			$router->get('/', ['as' => 'home', 'uses' => 'App\Http\Controllers\HomeController@index']);
+		$router->group(['middleware' => ['auth'], 'namespace' => 'App\Http\Controllers'], function($router) {
+			$router->get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+
+			$router->group(['prefix' => 'event-labels'], function($router) {
+				$router->get('create', ['as' => 'event-labels.create', 'uses' => 'EventLabelsController@create']);
+				$router->post('', ['as' => 'event-labels.create', 'uses' => 'EventLabelsController@store']);
+				$router->get('', ['as' => 'event-labels.index', 'uses' => 'EventLabelsController@index']);
+			});
 		});
 
 	}

@@ -38,4 +38,9 @@ class User extends Model implements UserContract, CanResetPasswordContract {
 		$this->attributes['password'] = Hash::make($password);
 	}
 
+	public function eventLabels()
+	{
+		return $this->hasMany('App\EventLabel');
+	}
+
 }
