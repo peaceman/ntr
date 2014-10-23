@@ -41,7 +41,7 @@ class EventLabelsController extends Controller {
 	public function store(CreateEventLabelRequest $request)
 	{
 		$eventLabel = $this->user->eventLabels()->create($request->all());
-		return redirect('event-labels.index');
+		return redirect(route('event-labels.index'));
 	}
 
 	/**
