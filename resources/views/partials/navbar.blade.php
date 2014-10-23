@@ -11,9 +11,14 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                {{--<li class="active">--}}
-                    {{--<a href="#">Home</a>--}}
-                {{--</li>--}}
+            @if(Auth::check())
+                <li>
+                    <a href="">Time Tracking</a>
+                </li>
+                <li>
+                    <a href="">Time Evaluation</a>
+                </li>
+            @endif
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

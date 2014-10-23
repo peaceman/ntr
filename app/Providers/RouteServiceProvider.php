@@ -50,7 +50,6 @@ class RouteServiceProvider extends ServiceProvider {
 	public function map(Router $router)
 	{
 		// require app_path('Http/routes.php');
-		$router->get('/', ['as' => 'home', 'uses' => 'App\Http\Controllers\HomeController@index']);
 
 		$router->group(['namespace' => 'App\Http\Controllers\Auth'], function($router) {
 			$router->group(['prefix' => 'auth'], function($router) {
@@ -73,6 +72,10 @@ class RouteServiceProvider extends ServiceProvider {
 				$router->post('reset', ['as' => 'password.reset', 'uses' => 'PasswordController@resetPassword']);
 			});
 
+		});
+
+		$router->group(['middleware' => ['auth']], function($router) {
+			$router->get('/', ['as' => 'home', 'uses' => 'App\Http\Controllers\HomeController@index']);
 		});
 
 	}
