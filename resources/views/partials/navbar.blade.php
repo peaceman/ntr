@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav">
             @if(Auth::check())
                 <li>
-                    <a href="">Time Tracking</a>
+                    <a href="{{ route('events.index') }}">Time Tracking</a>
                 </li>
                 <li>
                     <a href="">Time Evaluation</a>

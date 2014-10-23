@@ -85,6 +85,11 @@ class RouteServiceProvider extends ServiceProvider {
 				$router->get('{id}', ['as' => 'event-labels.edit', 'uses' => 'EventLabelsController@edit']);
 				$router->post('{id}', ['as' => 'event-labels.update', 'uses' => 'EventLabelsController@update']);
 			});
+
+			$router->group(['prefix' => 'events'], function($router) {
+				$router->get('', ['as' => 'events.index', 'uses' => 'EventsController@index']);
+				$router->post('', ['as' => 'events.store', 'uses' => 'EventsController@store']);
+			});
 		});
 
 	}
