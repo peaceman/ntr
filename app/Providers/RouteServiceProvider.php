@@ -81,6 +81,9 @@ class RouteServiceProvider extends ServiceProvider {
 				$router->get('create', ['as' => 'event-labels.create', 'uses' => 'EventLabelsController@create']);
 				$router->post('', ['as' => 'event-labels.create', 'uses' => 'EventLabelsController@store']);
 				$router->get('', ['as' => 'event-labels.index', 'uses' => 'EventLabelsController@index']);
+				$router->delete('{id}', ['as' => 'event-labels.destroy', 'uses' => 'EventLabelsController@destroy']);
+				$router->get('{id}', ['as' => 'event-labels.edit', 'uses' => 'EventLabelsController@edit']);
+				$router->post('{id}', ['as' => 'event-labels.update', 'uses' => 'EventLabelsController@update']);
 			});
 		});
 
