@@ -36,6 +36,9 @@ $app->bind(
 	'App\Console\Kernel'
 );
 
+function setHasError($errors, $fieldName) {
+	return $errors->has($fieldName) ? 'has-error' : '';
+}
 /*
 |--------------------------------------------------------------------------
 | Return The Application

@@ -5,15 +5,47 @@
 </div>
 <div class="container">
 	<div class="row">
-		<div class="col-md-4">
-			<form class="form-horizontal">
-				<div class="form-group">
-					<label for="email" class="col-md-2 control-label">Email</label>
-					<div class="col-md-10">
-						<input type="email" name="email" class="form-control">
-					</div>
-				</div>
-			</form>
+		<div class="col-md-6">
+		    {!! Form::open(['route' => 'auth.register', 'class' => 'form-horizontal']) !!}
+		        <!-- Email Form Input -->
+		        <div class="form-group {{ setHasError($errors, 'email') }}">
+		            {!! Form::label('email', 'Email', ['class' => 'control-label col-md-2']) !!}
+		            <div class="col-md-10">
+		                {!! Form::text('email', null, ['class' => 'form-control']) !!}
+		                @if($errors->has('email'))
+		                    <span class="help-block">{{ $errors->first('email') }}</span>
+		                @endif
+		            </div>
+		        </div>
+
+		        <!-- Password Form Input -->
+		        <div class="form-group {{ setHasError($errors, 'password') }}">
+		            {!! Form::label('password', 'Password', ['class' => 'control-label col-md-2']) !!}
+		            <div class="col-md-10">
+		                {!! Form::password('password', ['class' => 'form-control']) !!}
+		                @if($errors->has('password'))
+		                    <span class="help-block">{{ $errors->first('password') }}</span>
+		                @endif
+		            </div>
+		        </div>
+
+		        <!-- Password confirmation Form Input -->
+		        <div class="form-group {{ setHasError($errors, 'password_confirmation') }}">
+		            {!! Form::label('password_confirmation', 'Password confirmation', ['class' => 'control-label col-md-2']) !!}
+		            <div class="col-md-10">
+		                {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+		                @if($errors->has('password_confirmation'))
+		                    <span class="help-block">{{ $errors->first('password_confirmation') }}</span>
+		                @endif
+		            </div>
+		        </div>
+
+		        <div class="form-group">
+		            <div class="col-md-10 col-md-offset-2">
+		                {!! Form::submit('Register', ['class' => 'btn btn-primary']) !!}
+		            </div>
+		        </div>
+			{!! Form::close() !!}
 		</div>
 	</div>
 </div>

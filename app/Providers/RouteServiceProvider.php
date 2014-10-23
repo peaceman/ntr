@@ -11,9 +11,9 @@ class RouteServiceProvider extends ServiceProvider {
 	 * @var array
 	 */
 	protected $scan = [
-		'App\Http\Controllers\HomeController',
-		'App\Http\Controllers\Auth\AuthController',
-		'App\Http\Controllers\Auth\PasswordController',
+//		'App\Http\Controllers\HomeController',
+//		'App\Http\Controllers\Auth\AuthController',
+//		'App\Http\Controllers\Auth\PasswordController',
 	];
 
 	/**
@@ -50,6 +50,29 @@ class RouteServiceProvider extends ServiceProvider {
 	public function map(Router $router)
 	{
 		// require app_path('Http/routes.php');
+		$router->group(['namespace' => 'App\Http\Controllers\Auth'], function($router) {
+			$router->group(['prefix' => 'auth'], function($router) {
+				$router->group(['middleware' => ['guest']], function($router) {
+					$router->get('register', ['as' => 'auth.register', 'uses' => 'AuthController@showRegistrationForm']);
+					$router->post('register', ['as' => 'auth.register', 'uses' => 'AuthController@register']);
+
+					$router->get('login', ['as' => 'auth.login', 'uses' => 'AuthController@showLoginForm']);
+					$router->post('login', ['as' => 'auth.login', 'uses' => 'AuthController@login']);
+				});
+
+				$router->get('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@logout']);
+			});
+
+			$router->group(['prefix' => 'password', 'middleware' => ['guest']], function($router) {
+				$router->get('email', ['as' => 'password.reset-request', 'uses' => 'PasswordController@showResetRequestForm']);
+				$router->post('email', ['as' => 'password.reset-request', 'uses' => 'PasswordController@sendResetLink']);
+
+				$router->get('reset/{token}', ['as' => 'password.reset', 'uses' => 'PasswordController@showResetForm']);
+				$router->post('reset', ['as' => 'password.reset', 'uses' => 'PasswordController@resetPassword']);
+			});
+
+		});
+
 	}
 
 }
