@@ -1,19 +1,9 @@
 var elixir = require('laravel-elixir');
-
-/*
- |----------------------------------------------------------------
- | Have a Drink!
- |----------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic
- | Gulp tasks for your Laravel application. Elixir supports
- | several common CSS, JavaScript and even testing tools!
- |
- */
+require('laravel-elixir-bower');
 
 elixir(function(mix) {
-    mix.sass("bootstrap.scss")
+    mix.bower()
+       .version(['css/vendor.css', 'js/vendor.js'])
        .routes()
-       .events()
-       .phpUnit();
+       .events();
 });
