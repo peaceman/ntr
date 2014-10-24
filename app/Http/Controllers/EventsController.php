@@ -23,7 +23,11 @@ class EventsController extends Controller {
 	public function index()
 	{
 		$eventLabels = $this->user->eventLabels()->lists('name', 'id');
-		return view('events.index', compact('eventLabels'));
+		$recentEvents = $this->user->events()
+			->orderBy('started_at', 'desc')
+			->get();
+
+		return view('events.index', compact('eventLabels', 'recentEvents'));
 	}
 
 	/**
