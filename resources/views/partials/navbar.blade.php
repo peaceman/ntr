@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">nTimeRec</a>
+            <a class="navbar-brand" href="">nTimeRec</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
