@@ -18,34 +18,9 @@
     <div class="col-md-12">
         <fieldset>
             <legend>Recent events</legend>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Label</th>
-                        <th>Started at</th>
-                        <th>Ended at</th>
-                        <th>Duration</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($recentEvents as $event)
-                    <tr>
-                        <td>{{ $event->id }}</td>
-                        <td>{{ $event->eventLabel->name }}</td>
-                        <td>{{ $event->started_at }}</td>
-                        <td>{{ $event->ended_at }}</td>
-                        <td>{{ $event->getDuration() }}</td>
-                        <td>blubber</td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="6">No entries available</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+            {!! $tableListing->getTableData() !!}
+            {!! $tableListing->getPagination() !!}
+            {!! $tableListing->getPaginationInfo() !!}
         </fieldset>
     </div>
 </div>

@@ -89,6 +89,7 @@ class RouteServiceProvider extends ServiceProvider {
 			$router->group(['prefix' => 'events'], function($router) {
 				$router->get('', ['as' => 'events.index', 'uses' => 'EventsController@index']);
 				$router->post('', ['as' => 'events.store', 'uses' => 'EventsController@store']);
+				$router->post('{id}/stop', ['as' => 'events.stop', 'uses' => 'EventsController@stop']);
 			});
 		});
 

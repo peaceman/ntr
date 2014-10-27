@@ -2,6 +2,7 @@
 
 use App\Event;
 use App\Http\Requests\StartEventRequest;
+use App\Http\TableListings\EventTableListing;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\User;
 use Illuminate\Routing\Controller;
@@ -27,7 +28,11 @@ class EventsController extends Controller {
 			->orderBy('started_at', 'desc')
 			->get();
 
-		return view('events.index', compact('eventLabels', 'recentEvents'));
+		$tableListing = new EventTableListing();
+		$tableListing->query->where('events.user_id', $this->user->id);
+		$tableListing->prepareList();
+
+		return view('events.index', compact('eventLabels', 'recentEvents', 'tableListing'));
 	}
 
 	/**
@@ -54,6 +59,17 @@ class EventsController extends Controller {
 		$event->user()->associate($this->user);
 		$event->eventLabel()->associate($eventLabel);
 		$event->started_at = Carbon::now();
+		$event->save();
+
+		return redirect(route('events.index'));
+	}
+
+	public function stop($id)
+	{
+		$event = $this->user->events()
+			->findOrFail($id);
+
+		$event->ended_at = Carbon::now();
 		$event->save();
 
 		return redirect(route('events.index'));
