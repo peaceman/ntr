@@ -13,9 +13,15 @@ class StartEventRequest extends FormRequest {
 	{
 		$user = $this->container['auth']->user();
 
-		return [
-			'event_label_id' => ['required', 'exists:event_labels,id,user_id,' . $user->id],
-		];
+		if (is_numeric($this->get('event_label_id'))) {
+			return [
+				'event_label_id' => ['required', 'exists:event_labels,id,user_id,' . $user->id],
+			];
+		} else {
+			return [
+				'event_label_id' => ['required'],
+			];
+		}
 	}
 
 	/**

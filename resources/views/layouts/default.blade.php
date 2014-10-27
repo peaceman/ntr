@@ -5,6 +5,7 @@
 	<title>nTimeRec</title>
 	<link rel="stylesheet" href="{{ elixir('css/vendor.css') }}" media="screen" charset="utf-8">
 	<link rel="stylesheet" href="{{ elixir('css/main.css') }}" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="/css/selectize.bootstrap3.css"/>
 	<script src="{{ elixir('js/vendor.js') }}"></script>
 	<script>
 	$(function() {

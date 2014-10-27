@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Event;
+use App\EventLabel;
 use App\Http\Requests\StartEventRequest;
 use App\Http\TableListings\EventTableListing;
 use Carbon\Carbon;
@@ -52,8 +53,21 @@ class EventsController extends Controller {
 	 */
 	public function store(StartEventRequest $request)
 	{
-		$eventLabel = $this->user->eventLabels()
-			->findOrFail($request->get('event_label_id'));
+		$eventLabelId = $request->get('event_label_id');
+
+		if (is_numeric($eventLabelId)) {
+			$eventLabel = $this->user->eventLabels()
+				->findOrFail($eventLabelId);
+		} else {
+			$eventLabel = EventLabel::firstOrNew([
+				'user_id' => $this->user->id,
+				'name' => $eventLabelId,
+			]);
+
+			$eventLabel->user()->associate($this->user);
+			$eventLabel->save();
+		}
+
 
 		$event = new Event();
 		$event->user()->associate($this->user);
