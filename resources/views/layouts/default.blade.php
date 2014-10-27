@@ -6,6 +6,16 @@
 	<link rel="stylesheet" href="{{ elixir('css/vendor.css') }}" media="screen" charset="utf-8">
 	<link rel="stylesheet" href="{{ elixir('css/main.css') }}" media="screen" charset="utf-8">
 	<script src="{{ elixir('js/vendor.js') }}"></script>
+	<script>
+	$(function() {
+		$(document.body).livetime();
+		$('[data-duration]').each(function(idx, ele) {
+			var durationInSeconds = parseInt(ele.getAttribute('data-duration'));
+			var duration = moment.duration(durationInSeconds, 'seconds');
+			ele.innerHTML = duration.format('hh:mm:ss', {trim: false});
+		});
+	});
+	</script>
 </head>
 <body>
 	@include('partials.navbar')

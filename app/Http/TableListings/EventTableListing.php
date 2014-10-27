@@ -26,6 +26,10 @@ class EventTableListing extends BaseTblist {
 			'sortable' => true,
 			'table_column' => 'events.ended_at',
 		],
+		'duration' => [
+			'label' => 'Duration',
+			'sortable' => false,
+		],
 	];
 	public $columnsToSelect = [
 		'events.*',
@@ -55,11 +59,23 @@ class EventTableListing extends BaseTblist {
 			?>
 			<form action="<?= route('events.stop', $row->id) ?>" method="POST">
 				<?= \Form::token() ?>
-				<input type="submit" value="Stop" class="btn btn-default btn-xs"/>
+				<input type="submit" value="Stop tracking" class="btn btn-danger btn-xs"/>
 			</form>
 			<?php
 		} else {
 			echo $row->ended_at;
+		}
+	}
+
+	protected function colSetDuration(Event $event) {
+		if ($event->hasEnded()) {
+			?>
+			<span data-duration="<?= $event->getDuration() ?>"></span>
+			<?php
+		} else {
+			?>
+			<time datetime="<?= $event->started_at->toRfc3339String() ?>" data-time-label="td_hh:d_mm:d_ss"></time>
+			<?php
 		}
 	}
 }
