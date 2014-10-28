@@ -78,6 +78,21 @@ class EventsController extends Controller {
 		return \Redirect::back();
 	}
 
+	public function restart($id)
+	{
+		/** @var Event $oldEvent */
+		$oldEvent = $this->user->events()
+			->findOrFail($id);
+
+		$newEvent = new Event();
+		$newEvent->user()->associate($this->user);
+		$newEvent->eventLabel()->associate($oldEvent->eventLabel);
+		$newEvent->started_at = Carbon::now();
+		$newEvent->save();
+
+		return \Redirect::back();
+	}
+
 	public function stop($id)
 	{
 		$event = $this->user->events()
