@@ -42,6 +42,7 @@ class EventTableListing extends BaseTblist {
 		'started_at' => 'desc',
 	];
 	public $perPage = 10;
+	public $pageJump = 5;
 
 	public function __construct() {
 		parent::__construct();
