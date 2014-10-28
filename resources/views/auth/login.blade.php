@@ -32,7 +32,7 @@
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2">
                     {!! Form::submit('Login', ['class' => 'btn btn-primary']) !!}
-
+                    <a href="{{ route('password.reset-request') }}">Request password reset</a>
                 </div>
             </div>
             {!! Form::close() !!}

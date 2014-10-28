@@ -94,7 +94,7 @@ class PasswordController extends Controller {
 
 		$response = $this->passwords->reset($credentials, function($user, $password)
 		{
-			$user->password = bcrypt($password);
+			$user->password = $password;
 
 			$user->save();
 		});
