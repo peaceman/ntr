@@ -49,6 +49,7 @@ class EventsController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param \App\Http\Requests\StartEventRequest $request
 	 * @return Response
 	 */
 	public function store(StartEventRequest $request)
