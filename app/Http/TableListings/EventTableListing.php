@@ -30,6 +30,9 @@ class EventTableListing extends BaseTblist {
 			'label' => 'Duration',
 			'sortable' => false,
 		],
+		'actions' => [
+			'label' => 'Actions',
+		],
 	];
 	public $columnsToSelect = [
 		'events.*',
@@ -42,16 +45,13 @@ class EventTableListing extends BaseTblist {
 
 	public function __construct() {
 		parent::__construct();
-//		$this->addActionColumn();
 
 		$this->query = Event::query()
 			->join('event_labels', 'events.event_label_id', '=', 'event_labels.id');
 	}
 
-	protected function colSetAction($row) {
-		?>
-		moar actions!!
-		<?php
+	protected function colSetActions(Event $event) {
+		echo view('events.col-actions', ['event' => $event]);
 	}
 
 	protected function colSetEndedAt(Event $event) {

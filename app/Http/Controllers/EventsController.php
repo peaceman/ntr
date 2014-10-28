@@ -75,7 +75,7 @@ class EventsController extends Controller {
 		$event->started_at = Carbon::now();
 		$event->save();
 
-		return redirect(route('events.index'));
+		return \Redirect::back();
 	}
 
 	public function stop($id)
@@ -86,7 +86,7 @@ class EventsController extends Controller {
 		$event->ended_at = Carbon::now();
 		$event->save();
 
-		return redirect(route('events.index'));
+		return \Redirect::back();
 	}
 
 	/**
@@ -130,7 +130,12 @@ class EventsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		/** @var Event $event */
+		$event = $this->user->events()
+			->findOrFail($id);
+
+		$event->delete();
+		return \Redirect::back();
 	}
 
 }

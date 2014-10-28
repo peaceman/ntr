@@ -90,6 +90,8 @@ class RouteServiceProvider extends ServiceProvider {
 				$router->get('', ['as' => 'events.index', 'uses' => 'EventsController@index']);
 				$router->post('', ['as' => 'events.store', 'uses' => 'EventsController@store']);
 				$router->post('{id}/stop', ['as' => 'events.stop', 'uses' => 'EventsController@stop']);
+				$router->post('{id}/restart', ['as' => 'events.restart', 'uses' => 'EventsController@restart']);
+				$router->delete('{id}', ['as' => 'events.delete', 'uses' => 'EventsController@destroy']);
 			});
 		});
 
