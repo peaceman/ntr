@@ -54,28 +54,11 @@ class EventTableListing extends BaseTblist {
 		<?php
 	}
 
-	protected function colSetEndedAt($row) {
-		if (is_null($row->ended_at)) {
-			?>
-			<form action="<?= route('events.stop', $row->id) ?>" method="POST">
-				<?= \Form::token() ?>
-				<input type="submit" value="Stop tracking" class="btn btn-danger btn-xs"/>
-			</form>
-			<?php
-		} else {
-			echo $row->ended_at;
-		}
+	protected function colSetEndedAt(Event $event) {
+		echo view('events.col-ended-at', ['event' => $event]);
 	}
 
 	protected function colSetDuration(Event $event) {
-		if ($event->hasEnded()) {
-			?>
-			<span data-duration="<?= $event->getDuration() ?>"></span>
-			<?php
-		} else {
-			?>
-			<time datetime="<?= $event->started_at->toRfc3339String() ?>" data-time-label="td_hh:d_mm:d_ss"></time>
-			<?php
-		}
+		echo view('events.col-duration', ['event' => $event]);
 	}
 }
