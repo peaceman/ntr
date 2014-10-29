@@ -16,7 +16,7 @@
                     <a href="{{ route('events.index') }}">Time Tracking</a>
                 </li>
                 <li>
-                    <a href="">Time Evaluation</a>
+                    <a href="{{ route('reports.index') }}">Time Tracking Report</a>
                 </li>
             @endif
             </ul>

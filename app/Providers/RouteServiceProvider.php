@@ -93,6 +93,10 @@ class RouteServiceProvider extends ServiceProvider {
 				$router->post('{id}/restart', ['as' => 'events.restart', 'uses' => 'EventsController@restart']);
 				$router->delete('{id}', ['as' => 'events.delete', 'uses' => 'EventsController@destroy']);
 			});
+
+			$router->group(['prefix' => 'reports'], function($router) {
+				$router->get('', ['as' => 'reports.index', 'uses' => 'ReportsController@index']);
+			});
 		});
 
 	}
