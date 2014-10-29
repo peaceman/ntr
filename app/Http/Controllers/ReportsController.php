@@ -17,6 +17,7 @@ class ReportsController extends Controller {
 
 	public function index()
 	{
-		return view('reports.index');
+		$eventLabels = $this->user->eventLabels()->lists('name', 'id');
+		return view('reports.index', compact('eventLabels'));
 	}
 }

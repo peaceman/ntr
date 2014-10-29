@@ -13,14 +13,10 @@
                     </div>
                 </div>
                 <div class="col-xs-4">
-                    <select class="form-control" name="event_label_id" placeholder="Select a label">
-                        <option value=""></option>
-                        <option value="foo">foo</option>
-                        <option value="bar">bar</option>
-                    </select>
+                    {!! Form::select('event_label_id', [null => ''] + $eventLabels, null, ['class' => 'form-control', 'placeholder' => 'Select a label']) !!}
                 </div>
                 <div class="col-xs-3">
-                    <input value="Submit" type="submit" class="btn btn-primary"/>
+                    <input value="Request report" type="submit" class="btn btn-primary"/>
                 </div>
             </div>
         </form>
